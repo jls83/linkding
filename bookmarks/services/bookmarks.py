@@ -1,3 +1,4 @@
+import logging
 from typing import Union
 
 from django.contrib.auth.models import User
@@ -7,6 +8,8 @@ from bookmarks.models import Bookmark, parse_tag_string
 from bookmarks.services.tags import get_or_create_tags
 from bookmarks.services import website_loader
 from bookmarks.services import tasks
+
+logger = logging.getLogger(__name__)
 
 
 def create_bookmark(bookmark: Bookmark, tag_string: str, current_user: User):
@@ -22,6 +25,7 @@ def create_bookmark(bookmark: Bookmark, tag_string: str, current_user: User):
     # Set currently logged in user as owner
     bookmark.owner = current_user
     # Set dates
+    logger.info(f"Bookmark date_added: {bookmark.date_added}")
     if not bookmark.date_added:
         bookmark.date_added = timezone.now()
     bookmark.date_modified = timezone.now()
