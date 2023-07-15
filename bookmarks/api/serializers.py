@@ -40,7 +40,7 @@ class BookmarkSerializer(serializers.ModelSerializer):
         read_only_fields = [
             'website_title',
             'website_description',
-            'date_added',
+            # 'date_added',
             'date_modified'
         ]
         list_serializer_class = BookmarkListSerializer
@@ -64,6 +64,7 @@ class BookmarkSerializer(serializers.ModelSerializer):
         bookmark.is_archived = validated_data['is_archived']
         bookmark.unread = validated_data['unread']
         bookmark.shared = validated_data['shared']
+        bookmark.date_added = validated_data.get('date_added', None)
         tag_string = build_tag_string(validated_data['tag_names'])
         return create_bookmark(bookmark, tag_string, self.context['user'])
 

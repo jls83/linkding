@@ -22,7 +22,8 @@ def create_bookmark(bookmark: Bookmark, tag_string: str, current_user: User):
     # Set currently logged in user as owner
     bookmark.owner = current_user
     # Set dates
-    bookmark.date_added = timezone.now()
+    if not bookmark.date_added:
+        bookmark.date_added = timezone.now()
     bookmark.date_modified = timezone.now()
     bookmark.save()
     # Update tag list
