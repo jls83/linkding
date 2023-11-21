@@ -109,8 +109,10 @@ class BookmarkSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ["id", "name", "date_added"]
-        read_only_fields = ["date_added"]
+        fields = ["id", "name", "date_added", "bookmark_count"]
+        read_only_fields = ["date_added", "bookmark_count"]
+
+    bookmark_count = serializers.IntegerField(required=False, default=0)
 
     def create(self, validated_data):
         return get_or_create_tag(validated_data["name"], self.context["user"])

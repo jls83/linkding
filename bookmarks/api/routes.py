@@ -1,5 +1,6 @@
 import logging
 
+from django.db.models import Count
 from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
@@ -144,7 +145,10 @@ class TagViewSet(
 
     def get_queryset(self):
         user = self.request.user
-        return Tag.objects.all().filter(owner=user)
+        return Tag.objects\
+            .filter(owner=user)\
+            .annotate(bookmark_count=Count('bookmark'))\
+            .order_by('-bookmark_count')
 
     def get_serializer_context(self):
         return {"user": self.request.user}

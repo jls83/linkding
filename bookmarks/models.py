@@ -26,6 +26,9 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    def bookmark_count(self):
+        self.bookmark_set.objects.count()
+
 
 def sanitize_tag_name(tag_name: str):
     # strip leading/trailing spaces
