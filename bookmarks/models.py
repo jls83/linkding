@@ -26,8 +26,9 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    @property
     def bookmark_count(self):
-        self.bookmark_set.objects.count()
+        return self.bookmark_set.count()
 
 
 def sanitize_tag_name(tag_name: str):

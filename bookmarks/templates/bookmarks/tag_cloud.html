@@ -20,13 +20,13 @@
               <a href="?{% add_tag_to_query tag.name %}"
                  class="mr-2" data-is-tag-item>
                 <span
-                    class="highlight-char">{{ tag.name|first_char }}</span><span>{{ tag.name|remaining_chars:1 }}</span>
+                    class="highlight-char">{{ tag.name|first_char }}</span><span>{{ tag.name|remaining_chars:1 }}:{{ tag.bookmark_count }}</span>
               </a>
             {% else %}
               {# Render remaining tags normally #}
               <a href="?{% add_tag_to_query tag.name %}"
                  class="mr-2" data-is-tag-item>
-                <span>{{ tag.name }}</span>
+                <span>{{ tag.name }}:{{ tag.bookmark_count }}</span>
               </a>
             {% endif %}
           {% endfor %}
