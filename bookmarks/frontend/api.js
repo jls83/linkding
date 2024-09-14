@@ -19,6 +19,7 @@ export class ApiClient {
       .then((data) => data.results);
   }
 
+  // TODO: add sort property parameter
   getTags(options = { limit: 100, offset: 0 }) {
     const url = `${this.baseUrl}tags/?limit=${options.limit}&offset=${options.offset}`;
 

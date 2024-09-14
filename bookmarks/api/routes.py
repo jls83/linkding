@@ -148,6 +148,7 @@ class TagViewSet(
         return Tag.objects\
             .filter(owner=user)\
             .annotate(bookmark_count=Count('bookmark'))\
+            # TODO: order this by the property coming on in the request OR a default
             .order_by('-bookmark_count')
 
     def get_serializer_context(self):
