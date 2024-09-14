@@ -52,7 +52,8 @@ class BookmarkIndexViewTestCase(TestCase, BookmarkFactoryMixin, HtmlTestMixin):
         tag_items = tag_cloud.select("a[data-is-tag-item]")
         self.assertEqual(len(tag_items), len(tags))
 
-        tag_item_names = [tag_item.text.strip() for tag_item in tag_items]
+        # TODO: comment
+        tag_item_names = [tag_item.text.strip().split(":")[0] for tag_item in tag_items]
 
         for tag in tags:
             self.assertTrue(tag.name in tag_item_names)

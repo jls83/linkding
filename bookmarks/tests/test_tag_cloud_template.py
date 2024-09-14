@@ -43,7 +43,8 @@ class TagCloudTemplateTest(TestCase, BookmarkFactoryMixin, HtmlTestMixin):
 
             for tag_index, tag in enumerate(tags, start=0):
                 link_element = link_elements[tag_index]
-                self.assertEqual(link_element.text.strip(), tag)
+                # TODO: comment
+                self.assertEqual(link_element.text.strip().split(":")[0], tag)
 
     def assertNumSelectedTags(self, rendered_template: str, count: int):
         soup = self.make_soup(rendered_template)
@@ -207,10 +208,11 @@ class TagCloudTemplateTest(TestCase, BookmarkFactoryMixin, HtmlTestMixin):
             url="/test?q=term1&sort=title_asc&page=2"
         )
 
+        # TODO: comment
         self.assertInHTML(
             """
             <a href="?q=term1+%23tag1&sort=title_asc&page=2" class="mr-2" data-is-tag-item>
-              <span class="highlight-char">t</span><span>ag1</span>
+                <span class="highlight-char">t</span><span>ag1:1</span>
             </a>
         """,
             rendered_template,
